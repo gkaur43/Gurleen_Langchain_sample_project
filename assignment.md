@@ -46,7 +46,7 @@ Your repo must contain:
 
 ---
 
-### 1. Sanjay Kumar Shaswani — Resume Reviewer Agent
+### 1. Chan Wei Khjan — Resume Reviewer Agent
 
 **Use Case:** A user pastes their resume text and a job description. The agent reviews the resume against the job requirements and suggests targeted improvements.
 
@@ -64,7 +64,7 @@ Your repo must contain:
 
 ---
 
-### 2. Somya Jain — Recipe Generator Agent
+### 2. Gurleen Kaur — Recipe Generator Agent
 
 **Use Case:** A user provides a list of ingredients they have at home. The agent suggests a recipe and then produces step-by-step cooking instructions.
 
@@ -82,7 +82,7 @@ Your repo must contain:
 
 ---
 
-### 3. Rohan Sawant — Code Explainer Agent
+### 3. Komal Patil — Code Explainer Agent
 
 **Use Case:** A user pastes a block of code (any language). The agent explains what it does in plain English and then adds inline comments to the code.
 
@@ -100,7 +100,7 @@ Your repo must contain:
 
 ---
 
-### 4. Shiva Kumar — Story Writer Agent
+### 4. Anived Mishra — Story Writer Agent
 
 **Use Case:** A user provides a theme or a one-line story prompt. The agent first creates a story outline and then expands it into a complete short story.
 
@@ -118,7 +118,7 @@ Your repo must contain:
 
 ---
 
-### 5. Keerthana S — Customer Complaint Handler Agent
+### 5. Amarnadh Ravipati — Customer Complaint Handler Agent
 
 **Use Case:** A user (customer service rep) pastes a customer complaint. The agent classifies its severity and drafts a professional, empathetic response.
 
@@ -136,7 +136,7 @@ Your repo must contain:
 
 ---
 
-### 6. Shubham Gotal — SQL Query Helper Agent
+### 6. Lalit Jain — SQL Query Helper Agent
 
 **Use Case:** A user describes what data they want in plain English. The agent generates a SQL query and then explains what the query does line by line.
 
@@ -154,7 +154,7 @@ Your repo must contain:
 
 ---
 
-### 7. Lipsha Jena — Product Description Writer Agent
+### 7. Gurkamal Singh — Product Description Writer Agent
 
 **Use Case:** A user provides a product name and a list of features. The agent first writes a formal product description and then rewrites it as a catchy marketing copy.
 
@@ -172,7 +172,7 @@ Your repo must contain:
 
 ---
 
-### 8. Ramesh Kola — Meeting Notes Summarizer Agent
+### 8. Joseph — Meeting Notes Summarizer Agent
 
 **Use Case:** A user pastes raw, messy meeting notes. The agent first creates a clean summary and then extracts all action items with owners and deadlines.
 
@@ -190,7 +190,7 @@ Your repo must contain:
 
 ---
 
-### 9. Nutan Mahale — Travel Itinerary Planner Agent
+### 9. Siddhesh Sawant — Travel Itinerary Planner Agent
 
 **Use Case:** A user provides a destination and the number of days for their trip. The agent suggests top places to visit and then builds a day-by-day itinerary.
 
@@ -208,7 +208,7 @@ Your repo must contain:
 
 ---
 
-### 10. Subramanian P — Interview Q&A Coach Agent
+### 10. Karthik Balaje R — Interview Q&A Coach Agent
 
 **Use Case:** A user provides a job role (e.g., "Data Analyst at a fintech startup"). The agent generates likely interview questions and then provides model answers.
 
@@ -226,7 +226,7 @@ Your repo must contain:
 
 ---
 
-### 11. Julie A — Social Media Post Generator Agent
+### 11. Sai Sankar — Social Media Post Generator Agent
 
 **Use Case:** A user provides a topic, product launch, or announcement. The agent first writes a formal press-style announcement and then converts it into an engaging social media post.
 
@@ -244,7 +244,7 @@ Your repo must contain:
 
 ---
 
-### 12. Sanjana Narkar — Bug Report Analyzer Agent
+### 12. Bala Krishna Yenumula — Bug Report Analyzer Agent
 
 **Use Case:** A user pastes a bug report or error description. The agent identifies likely root causes and then suggests a structured debugging plan.
 
@@ -262,7 +262,7 @@ Your repo must contain:
 
 ---
 
-### 13. Zohra Lanewala — Study Notes Generator Agent
+### 13. Beadon Roy — Study Notes Generator Agent
 
 **Use Case:** A user provides a topic they want to study (e.g., "how neural networks work"). The agent creates comprehensive study notes and then converts them into flashcard-style Q&A pairs.
 
@@ -280,7 +280,7 @@ Your repo must contain:
 
 ---
 
-### 14. Ashirvad Gandham — Job Description Writer Agent
+### 14. Sagar Sable — Job Description Writer Agent
 
 **Use Case:** A user provides a job title and key requirements. The agent drafts a formal job description and then rewrites it to be more engaging and attractive to candidates.
 
@@ -295,80 +295,6 @@ Your repo must contain:
 - Output: A compelling, candidate-friendly job posting
 
 **System Prompt:** The agent acts as a talent acquisition specialist who writes job descriptions that attract high-quality candidates.
-
----
-
-### 15. Jignesh Shah — News Article Summarizer Agent
-
-**Use Case:** A user pastes a long news article. The agent extracts the key facts and then writes a concise summary in simple, clear language.
-
-**Tool 1 — `extract_key_facts`**
-- Input: full text of a news article
-- Task: Extract the 5 W's (Who, What, When, Where, Why) and any other critical data points or quotes from the article
-- Output: A structured bullet-point list of key facts
-
-**Tool 2 — `write_plain_summary`**
-- Input: the key facts from Tool 1
-- Task: Write a 3–4 sentence summary of the article in simple, everyday language that anyone can understand — no jargon
-- Output: A concise, clear news summary
-
-**System Prompt:** The agent acts as a news digest editor who turns long articles into quick, easy-to-read summaries.
-
----
-
-### 16. S M Shohan — Motivational Quote Generator Agent
-
-**Use Case:** A user describes a situation or challenge they are facing (e.g., "I failed my exam and feel like giving up"). The agent creates personalised motivational content and formats it as shareable quotes.
-
-**Tool 1 — `generate_motivational_content`**
-- Input: the user's situation or challenge
-- Task: Generate empathetic, uplifting motivational content — include a relatable acknowledgement of the struggle, a mindset reframe, and an encouraging message
-- Output: A short motivational piece (150–200 words)
-
-**Tool 2 — `format_as_quotes`**
-- Input: the motivational content from Tool 1
-- Task: Extract and polish 3–5 powerful, shareable one-liner quotes from the content, each suitable for a social media post or phone wallpaper
-- Output: A numbered list of formatted quotes, each 1–2 sentences
-
-**System Prompt:** The agent acts as a motivational coach who turns personal struggles into powerful, shareable words of encouragement.
-
----
-
-### 17. Reddy Rani Ayyappaneni — Customer Feedback Analyzer Agent
-
-**Use Case:** A user pastes a batch of customer or user feedback (e.g., app store reviews, survey responses). The agent classifies the sentiment and generates an actionable insights report.
-
-**Tool 1 — `classify_feedback_sentiment`**
-- Input: a block of feedback text (can be multiple reviews or comments)
-- Task: Analyse each piece of feedback, classify it as Positive / Neutral / Negative, and identify the main theme (e.g., UI, performance, pricing, support)
-- Output: A structured table-style classification: `[Feedback snippet] | [Sentiment] | [Theme]`
-
-**Tool 2 — `generate_insights_report`**
-- Input: the classified feedback from Tool 1
-- Task: Synthesise the classifications into an actionable business report — what is working well, what needs improvement, and 3 specific recommended actions
-- Output: A concise insights report with sections for Strengths, Issues, and Recommended Actions
-
-**System Prompt:** The agent acts as a product analyst who turns raw customer feedback into clear business insights.
-
----
-
-### 18. Avanish Tiwari — Learning Path Generator Agent
-
-**Use Case:** A user provides a skill they want to learn and their current level (beginner/intermediate). The agent creates a structured curriculum and then maps it into a weekly study schedule.
-
-**Tool 1 — `generate_curriculum`**
-- Input: skill or topic to learn (e.g., "machine learning") and current level
-- Task: Design a structured learning curriculum — break the skill into logical modules, list the key concepts per module, and recommend resources (books, courses, docs)
-- Output: A module-by-module curriculum with learning objectives and resources
-
-**Tool 2 — `create_weekly_schedule`**
-- Input: the curriculum from Tool 1 and the number of weeks the user wants to complete it in
-- Task: Map the curriculum into a realistic week-by-week study plan — specify what to study each week, how many hours per day, and what to practice
-- Output: A week-by-week study schedule with daily time estimates
-
-**System Prompt:** The agent acts as a personal learning coach who builds structured, achievable study plans for any skill.
-
----
 
 ## Evaluation Criteria
 
