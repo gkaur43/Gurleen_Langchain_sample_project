@@ -296,6 +296,98 @@ Your repo must contain:
 
 **System Prompt:** The agent acts as a talent acquisition specialist who writes job descriptions that attract high-quality candidates.
 
+---
+
+### 15. Ankith Dasu — Fitness Workout Planner Agent
+
+**Use Case:** A user provides their fitness level, goal (e.g., weight loss, muscle gain), and available equipment. The agent assesses their profile and builds a personalised weekly workout plan.
+
+**Tool 1 — `assess_fitness_profile`**
+- Input: current fitness level (beginner / intermediate / advanced), primary goal, available equipment
+- Task: Analyse the inputs to build a structured fitness profile — identifying suitable exercise types, intensity ranges, and any limitations to account for
+- Output: A fitness profile summary with recommended training focus and intensity guidelines
+
+**Tool 2 — `create_workout_plan`**
+- Input: the fitness profile from Tool 1
+- Task: Generate a 5-day weekly workout plan with specific exercises, sets, reps, rest periods, and rest days
+- Output: A complete weekly workout schedule, one section per day
+
+**System Prompt:** The agent acts as a certified personal trainer who designs safe, effective workout plans tailored to individual fitness levels and goals.
+
+---
+
+### 16. Tilottama Pawar — Language Learning Tutor Agent
+
+**Use Case:** A user specifies a language they want to learn and their current proficiency level. The agent creates a vocabulary lesson and then produces interactive practice exercises.
+
+**Tool 1 — `generate_vocabulary_lesson`**
+- Input: target language and proficiency level (beginner / intermediate / advanced)
+- Task: Generate a themed vocabulary lesson (e.g., greetings, food, travel) with 10–15 words, their translations, pronunciation tips, and example sentences
+- Output: A structured vocabulary lesson with words, translations, and example sentences
+
+**Tool 2 — `create_practice_exercises`**
+- Input: the vocabulary lesson from Tool 1
+- Task: Design 3 types of practice exercises — fill-in-the-blank sentences, translation tasks (English → target language), and a short conversational dialogue prompt using the vocabulary
+- Output: A numbered set of exercises with an answer key at the end
+
+**System Prompt:** The agent acts as a patient, encouraging language tutor who makes vocabulary engaging and easy to retain through structured practice.
+
+---
+
+### 17. Mini Yadav — Personal Finance Advisor Agent
+
+**Use Case:** A user provides their monthly income and a breakdown of expenses by category. The agent analyses their spending habits and then creates a personalised savings plan.
+
+**Tool 1 — `analyze_spending_habits`**
+- Input: monthly income and expense categories with amounts (e.g., rent: 15000, food: 6000, transport: 3000)
+- Task: Calculate the savings rate, identify overspending categories compared to recommended budgeting ratios (50/30/20 rule), and highlight areas of concern
+- Output: A structured spending analysis with category breakdown, savings rate, and flagged problem areas
+
+**Tool 2 — `create_savings_plan`**
+- Input: the spending analysis from Tool 1 and the user's savings goal (e.g., "save ₹50,000 in 6 months")
+- Task: Build a realistic monthly savings plan — which categories to cut, by how much, and how to reallocate funds toward the goal
+- Output: A concrete, actionable savings plan with revised monthly budget and milestone targets
+
+**System Prompt:** The agent acts as a personal finance advisor who helps users take control of their money with practical, jargon-free budgeting advice.
+
+---
+
+### 18. Purnima Sambasivan — Event Planning Agent
+
+**Use Case:** A user provides details about an upcoming event (type, guest count, budget, date). The agent creates an event outline and then generates a comprehensive planning checklist.
+
+**Tool 1 — `create_event_outline`**
+- Input: event type (e.g., birthday party, corporate dinner, wedding reception), number of guests, total budget, and event date
+- Task: Generate a structured event outline covering venue requirements, catering needs, decoration theme, entertainment ideas, and budget allocation per category
+- Output: A complete event outline with sections for Venue, Catering, Decor, Entertainment, and Budget Breakdown
+
+**Tool 2 — `generate_planning_checklist`**
+- Input: the event outline from Tool 1 and the event date
+- Task: Convert the outline into a time-ordered checklist of tasks with suggested deadlines (e.g., "8 weeks before: Book venue", "1 week before: Confirm guest count")
+- Output: A chronological planning checklist from 8 weeks out to the day-of
+
+**System Prompt:** The agent acts as a professional event planner who turns vague event ideas into detailed, stress-free execution plans.
+
+---
+
+### 19. Jocelyn Jose — Book Recommendation Agent
+
+**Use Case:** A user shares their reading preferences — favourite genres, books they loved, and what they're in the mood for. The agent builds a reading profile and then delivers personalised book recommendations.
+
+**Tool 1 — `analyze_reading_preferences`**
+- Input: favourite genres, 2–3 books the user has enjoyed, current mood or theme they want (e.g., "something uplifting", "a gripping thriller")
+- Task: Identify patterns in the user's reading taste — preferred narrative style, themes, pacing, and character types — and build a reading profile
+- Output: A reading profile summarising the user's taste with key preference tags
+
+**Tool 2 — `recommend_books`**
+- Input: the reading profile from Tool 1
+- Task: Recommend 5 books that closely match the profile — for each book include: Title, Author, One-line synopsis, and a personalised reason why it suits this reader
+- Output: A numbered list of 5 book recommendations with full details
+
+**System Prompt:** The agent acts as an avid reader and book curator who finds the perfect next read for anyone based on their unique tastes.
+
+---
+
 ## Evaluation Criteria
 
 | Criteria | Points |
