@@ -1,6 +1,6 @@
 """
 ===========================================================================
- EMAIL HUMANIZER -- A Beginner's LangChain Single-Agent Project
+ RECIPE GENERATOR -- A Beginner's LangChain Single-Agent Project
 ===========================================================================
 
  WHAT THIS PROJECT TEACHES YOU:
@@ -31,10 +31,10 @@
      THINK -> ACT -> OBSERVE -> THINK -> ... -> FINAL ANSWER
 
  HOW THIS PROJECT FLOWS:
-   1. User provides an email idea (e.g., "thank my team for Q4 results")
-   2. Agent calls draft_email tool   -> creates a formal email draft
-   3. Agent calls humanize_email tool -> rewrites it to sound natural
-   4. Agent returns the final humanized email to the user
+   1. User provides a list of ingredients (e.g., "potatoes, rice, onions, tomatoes")
+   2. Agent calls suggest_recipe tool       -> creates a recipe based on ingredients
+   3. Agent calls generate_cooking_steps tool -> creates beginner-friendly steps with timings
+   4. Agent returns the final complete recipe guide to the user
 
  KEY LANGCHAIN COMPONENTS USED:
    - ChatOpenAI      : LLM wrapper that sends prompts to OpenAI's GPT API
@@ -45,7 +45,7 @@
  SETUP:
    1. pip install -r requirements.txt
    2. Copy .env.example to .env and add your OpenAI API key
-   3. python email_humanizer.py
+   3. python recipe_generator.py
 
  See langchain_tutorial.md for a full beginner's guide to LangChain.
  See architecture_diagram.drawio for a visual diagram of this project.
@@ -68,9 +68,9 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[logging.StreamHandler(sys.stdout)],
 )
-logger = logging.getLogger("EmailHumanizer")
+logger = logging.getLogger("RecipeGenerator")
 
-logger.info("Starting Email Humanizer Agent...")
+logger.info("Starting Recipe Generator Agent...")
 
 load_dotenv()
 
@@ -94,94 +94,89 @@ logger.info("Defining agent tools...")
 
 
 @tool
-def draft_email(idea: str) -> str:
+def suggest_recipe(ingredients: str) -> str:
     """
-    Creates a structured email draft from a brief idea or topic.
-    Use this tool FIRST when the user provides an email idea.
-    Input should be the user's email idea or topic.
-    Returns a formal email draft with subject, greeting, body, and closing.
+    Suggests a suitable dish that can be made using the available ingredients.
+    Use this tool FIRST when the user provides their list of ingredients.
+    Input should be a comma-separated list of available ingredients.
+    Returns a recipe name, description, and full ingredient list with quantities.
     """
-    logger.info(f"[Tool: draft_email] Received idea: '{idea}'")
+    logger.info(f"[Tool: suggest_recipe] Received ingredients: '{ingredients}'")
 
-    draft_prompt = PromptTemplate(
-        input_variables=["idea"],
-        template="""You are a professional email writer.
-Given the following idea, write a structured email draft.
+    recipe_prompt = PromptTemplate(
+        input_variables=["ingredients"],
+        template="""You are a friendly home chef.
+Given the following ingredients, suggest a suitable dish to make.
 
-Idea: {idea}
+Ingredients: {ingredients}
 
-Write the email with:
-- A clear subject line
-- Professional greeting
-- Well-organized body (2-3 short paragraphs)
-- Professional closing
+Write the suggestion with:
+- A clear Recipe Name
+- A short, appetizing description
+- A full ingredient list with estimated quantities (you may allow 1-2 common pantry staples)
 
-Return ONLY the email, nothing else.""",
+Return ONLY the recipe details, nothing else.""",
     )
 
-    formatted_prompt = draft_prompt.format(idea=idea)
-    logger.info("[Tool: draft_email] Sending prompt to LLM...")
+    formatted_prompt = recipe_prompt.format(ingredients=ingredients)
+    logger.info("[Tool: suggest_recipe] Sending prompt to LLM...")
 
     response = llm.invoke(formatted_prompt)
 
-    logger.info("[Tool: draft_email] Draft created successfully!")
+    logger.info("[Tool: suggest_recipe] Recipe suggested successfully!")
     return response.content
 
 
 @tool
-def humanize_email(draft: str) -> str:
+def generate_cooking_steps(recipe_details: str) -> str:
     """
-    Takes a formal email draft and rewrites it to sound more human,
-    warm, and natural while keeping the core message intact.
-    Use this tool AFTER draft_email to make the email sound natural.
-    Input should be the full email draft text.
-    Returns a humanized version of the email.
+    Takes recipe details and converts them into numbered, beginner-friendly cooking steps with timings.
+    Use this tool AFTER suggest_recipe to make a clear step-by-step cooking guide.
+    Input should be the full recipe details text.
+    Returns a clear step-by-step cooking guide.
     """
-    logger.info("[Tool: humanize_email] Humanizing the email draft...")
+    logger.info("[Tool: generate_cooking_steps] Generating cooking steps for the recipe...")
 
-    humanize_prompt = PromptTemplate(
-        input_variables=["draft"],
-        template="""You are an expert at making emails sound human and natural.
+    steps_prompt = PromptTemplate(
+        input_variables=["recipe_details"],
+        template="""You are a friendly home chef helping a beginner cook.
 
-Take this email draft and rewrite it to sound like a real person wrote it.
+Take these recipe details and create a step-by-step cooking guide.
 
 Rules:
-- Use contractions (I'm, we're, don't, can't)
-- Vary sentence length (mix short and long sentences)
-- Add a touch of warmth and personality
-- Remove corporate jargon and stiff phrases
-- Keep it professional but approachable
-- Keep the same core message and structure
-- Make it sound like something you'd actually send to a colleague
+- Make the steps numbered and chronological
+- Ensure the language is beginner-friendly and encouraging
+- Include estimated timings for each major step (e.g., "Simmer for 10 minutes")
+- Keep it practical and easy to follow
+- Keep the same core recipe intact
 
-Email draft:
-{draft}
+Recipe details:
+{recipe_details}
 
-Return ONLY the humanized email, nothing else.""",
+Return ONLY the cooking steps, nothing else.""",
     )
 
-    formatted_prompt = humanize_prompt.format(draft=draft)
-    logger.info("[Tool: humanize_email] Sending to LLM for humanization...")
+    formatted_prompt = steps_prompt.format(recipe_details=recipe_details)
+    logger.info("[Tool: generate_cooking_steps] Sending to LLM for step generation...")
 
     response = llm.invoke(formatted_prompt)
 
-    logger.info("[Tool: humanize_email] Email humanized successfully!")
+    logger.info("[Tool: generate_cooking_steps] Cooking steps generated successfully!")
     return response.content
 
 
-tools = [draft_email, humanize_email]
+tools = [suggest_recipe, generate_cooking_steps]
 logger.info(f"Tools registered: {[t.name for t in tools]}")
 logger.info("Creating the agent...")
 
-SYSTEM_PROMPT = """You are an Email Humanizer assistant. Your job is to help users
-write natural, human-sounding emails.
+SYSTEM_PROMPT = """You are a friendly home chef who helps users cook meals with what they already have.
 
-When the user gives you an email idea, follow these steps:
-1. First, use the draft_email tool to create a structured email draft.
-2. Then, use the humanize_email tool to make the draft sound natural and warm.
-3. Return the final humanized email to the user.
+When the user gives you a list of ingredients, follow these steps:
+1. First, use the suggest_recipe tool to create a recipe suggestion.
+2. Then, use the generate_cooking_steps tool to produce clear cooking instructions with timings.
+3. Return the final recipe and steps to the user.
 
-Always use both tools in order: draft first, then humanize."""
+Always use both tools in order: suggest recipe first, then generate cooking steps."""
 
 agent_graph = create_agent(
     model=llm,
@@ -193,66 +188,40 @@ agent_graph = create_agent(
 logger.info("Agent created and ready to run!")
 
 
-def run_email_humanizer(email_idea: str) -> str:
+def run_recipe_generator(ingredients: str) -> str:
     """
-    Main function to run the email humanizer agent.
+    Main function to run the recipe generator agent.
 
     Args:
-        email_idea: A brief description of the email you want to write.
-                    Example: "thank my team for hitting Q4 targets"
+        ingredients: A comma-separated list of ingredients you have.
+                     Example: "chicken, broccoli, soy sauce, rice"
 
     Returns:
-        A humanized, natural-sounding email.
+        A complete recipe with step-by-step cooking instructions.
     """
     logger.info("=" * 60)
-    logger.info(f"USER'S EMAIL IDEA: {email_idea}")
+    logger.info(f"USER'S INGREDIENTS: {ingredients}")
     logger.info("=" * 60)
     logger.info("Agent is now thinking... watch the tool-calling loop below!")
     logger.info("-" * 60)
 
     result = agent_graph.invoke(
-        {"messages": [HumanMessage(content=email_idea)]}
+        {"messages": [HumanMessage(content=ingredients)]}
     )
 
-    final_email = result["messages"][-1].content
+    final_recipe = result["messages"][-1].content
 
     logger.info("-" * 60)
-    logger.info("Agent finished! Here's your humanized email:")
-    logger.info("=" * 60)
+    logger.info("FINAL RECIPE GUIDE GENERATED")
+    logger.info("-" * 60)
 
-    return final_email
+    return final_recipe
 
 
 if __name__ == "__main__":
+    user_ingredients = input("Enter the ingredients you have at home: ")
+    output = run_recipe_generator(user_ingredients)
     print("\n" + "=" * 60)
-    print("  EMAIL HUMANIZER AGENT")
-    print("  Powered by LangChain + OpenAI")
+    print("RECIPE GENERATOR OUTPUT")
     print("=" * 60)
-    print("\nDescribe the email you want to write, and the agent will")
-    print("create a natural, human-sounding email for you.\n")
-    print("Type 'quit' to exit.\n")
-
-    while True:
-        email_idea = input("Your email idea: ").strip()
-
-        if not email_idea:
-            print("Please enter an email idea.\n")
-            continue
-
-        if email_idea.lower() in ("quit", "exit", "q"):
-            print("\nGoodbye! Happy emailing!")
-            break
-
-        try:
-            humanized_email = run_email_humanizer(email_idea)
-
-            print("\n" + "=" * 60)
-            print("YOUR HUMANIZED EMAIL:")
-            print("=" * 60)
-            print(humanized_email)
-            print("=" * 60 + "\n")
-
-        except Exception as e:
-            logger.error(f"Something went wrong: {e}")
-            print(f"\nError: {e}")
-            print("Please check your API key and try again.\n")
+    print(output)
