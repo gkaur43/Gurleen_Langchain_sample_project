@@ -41,7 +41,7 @@ User's ingredient list
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Gurleen_Langchain_sample_project.git
+git clone https://github.com/gkaur43/Gurleen_Langchain_sample_project.git
 cd Gurleen_Langchain_sample_project
 ```
 
